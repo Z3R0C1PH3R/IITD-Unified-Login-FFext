@@ -1,0 +1,14 @@
+{
+  "name": "iitd-unified-login-assistant",
+  "version": "1.0.0",
+  "description": "IITD Unified Login Assistant for Moodle, Kerberos OAuth, and Webmail",
+  "scripts": {
+    "build": "zip -r ../iitd-unified-login.zip *",
+    "dev": "web-ext run",
+    "sign": "web-ext sign"
+  },
+  "author": "z3r0c1ph3r@pm.me",
+  "devDependencies": {
+    "web-ext": "^7.11.0"
+  }
+}

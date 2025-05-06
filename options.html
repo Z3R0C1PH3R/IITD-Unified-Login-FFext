@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IITD Unified Login Assistant Settings</title>
+  <style>
+    body { 
+      padding: 20px; 
+      max-width: 800px; 
+      margin: 0 auto; 
+      font-family: Arial, sans-serif;
+    }
+    .form-group { 
+      margin-bottom: 15px; 
+    }
+    label { 
+      display: block; 
+      margin-bottom: 5px; 
+      font-weight: bold;
+    }
+    input { 
+      width: 300px; 
+      padding: 8px; 
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button { 
+      padding: 10px 15px; 
+      background-color: #0078d7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0069c0;
+    }
+    .status { 
+      margin-top: 15px; 
+      color: green; 
+      font-weight: bold;
+    }
+    .instructions { 
+      background-color: #f8f9fa; 
+      padding: 15px; 
+      border-radius: 5px; 
+      margin-bottom: 20px;
+      border-left: 4px solid #0078d7;
+    }
+    .instructions h3 {
+      margin-top: 0;
+    }
+    .instructions ol {
+      padding-left: 20px;
+    }
+    .instructions li {
+      margin-bottom: 8px;
+    }
+    .instructions code {
+      background-color: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    .login-systems {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 30px 0;
+    }
+    .system-card {
+      flex: 1;
+      min-width: 250px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+    h2, h3 {
+      color: #0078d7;
+    }
+    
+    /* Toggle Switch Styling */
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 10px 0;
+      max-width: 300px;
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 56px;
+      height: 28px;
+    }
+    
+    .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 28px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+    
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(28px);
+    }
+    
+    .toggle-label {
+      font-weight: bold;
+    }
+    
+    .settings-section {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .settings-section h3 {
+      margin-top: 0;
+    }
+    
+    .highlight-box {
+      border: 2px solid #0078d7;
+      background-color: #f0f7ff;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 30px;
+    }
+    
+    /* Quick Links Section */
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    
+    .quick-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #f0f7ff;
+      border: 1px solid #0078d7;
+      border-radius: 4px;
+      padding: 8px 12px;
+      color: #0078d7;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+    
+    .quick-link:hover {
+      background-color: #0078d7;
+      color: white;
+    }
+    
+    .quick-link img {
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* Password security notice */
+    .password-notice {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    /* Last saved information */
+    .last-saved {
+      font-size: 13px;
+      color: #0078d7;
+      font-style: italic;
+      margin-top: 8px;
+    }
+    
+    /* Contact Section */
+    .contact-section {
+      margin-top: 30px;
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      text-align: center;
+    }
+    
+    .contact-email {
+      font-weight: bold;
+      color: #0078d7;
+    }
+  </style>
+</head>
+<body>
+  <h2>IITD Login Credentials Management</h2>
+  
+  <!-- Credentials Section - Highlighted and Positioned at Top -->
+  <div class="highlight-box">
+    <h3>Login Credentials</h3>
+    <p><strong>Fill in your credentials to enable automatic login:</strong></p>
+    
+    <form id="settings-form">
+      <div class="form-group">
+        <label for="username">IITD Kerberos Username:</label>
+        <input type="text" id="username" placeholder="Your Kerberos username">
+      </div>
+      <div class="form-group">
+        <label for="password">IITD Kerberos Password:</label>
+        <input type="password" id="password" placeholder="Enter to change password">
+        <div class="password-notice">Leave blank to keep your existing password</div>
+        <div id="lastSavedInfo" class="last-saved"></div>
+      </div>
+      <div class="form-group">
+        <label for="apiKey">Gemini API Key (for OAuth CAPTCHA solving):</label>
+        <input type="text" id="apiKey" placeholder="Enter your Gemini API key for OAuth CAPTCHA solving">
+        <div class="password-notice">Required only for Kerberos OAuth login with CAPTCHA</div>
+      </div>
+      
+      <!-- Save button moved above auto-login settings -->
+      <button id="save" type="submit" style="margin: 20px 0;">Save Credentials</button>
+      
+      <h4>Auto-login Settings: <span style="font-size: 12px; color: #666;">(Changes save automatically)</span></h4>
+      <div class="toggle-container">
+        <span class="toggle-label">OAuth Login</span>
+        <label class="switch">
+          <input type="checkbox" id="autoLoginOAuth" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="toggle-container">
+        <span class="toggle-label">Moodle Login</span>
+        <label class="switch">
+          <input type="checkbox" id="autoLoginMoodle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      
+      <div class="toggle-container">
+        <span class="toggle-label">Webmail Login</span>
+        <label class="switch">
+          <input type="checkbox" id="autoLoginWebmail" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </form>
+    
+    <div id="status" class="status"></div>
+  </div>
+  
+  <!-- Quick Access Links -->
+  <div class="settings-section">
+    <h3>Quick Access Links</h3>
+    <p>Access IITD services directly through these links:</p>
+    
+    <div class="quick-links">
+      <a href="https://webmail.iitd.ac.in/roundcube/" class="quick-link" target="_blank">
+        Webmail
+      </a>
+      <a href="https://moodle.iitd.ac.in/login/index.php" class="quick-link" target="_blank">
+        Moodle
+      </a>
+      <a href="https://eacademics.iitd.ac.in/sportal/login" class="quick-link" target="_blank">
+        eAcademics
+      </a>
+      <a href="https://exam.iitd.ac.in/" class="quick-link" target="_blank">
+        Exam Portal
+      </a>
+    </div>
+  </div>
+  
+  <!-- API Key Instructions -->
+  <div class="settings-section">
+    <div class="instructions">
+      <h3>How to get a Gemini API Key for OAuth CAPTCHA Solving</h3>
+      <ol>
+        <li>Visit <a href="https://aistudio.google.com/" target="_blank">Google AI Studio</a></li>
+        <li>Sign in with your Google account</li>
+        <li>Click on "Get API key" in the top-right corner</li>
+        <li>Choose "Create API key" if you don't have one already</li>
+        <li>Copy the generated API key</li>
+        <li>Paste it in the field above</li>
+      </ol>
+      <p>Note: You get $25 in free monthly credits, which is more than enough for CAPTCHA solving.</p>
+      <p><strong>The Gemini API Key is only needed for OAuth login CAPTCHA solving, not for Moodle or Webmail login.</strong></p>
+    </div>
+  </div>
+  
+  <!-- System Information -->
+  <div class="settings-section">
+    <h3>Supported Login Systems</h3>
+    <div class="login-systems">
+      <div class="system-card">
+        <h3>Moodle Login</h3>
+        <p>Automatically solve the math captcha on Moodle login page.</p>
+        <p><strong>Features:</strong></p>
+        <ul>
+          <li>Auto-solves addition/subtraction problems</li>
+          <li>Extracts correct value from captcha text</li>
+          <li>Auto-submits the login form</li>
+        </ul>
+      </div>
+      <div class="system-card">
+        <h3>Kerberos OAuth Login</h3>
+        <p>Uses Gemini AI to solve image captchas on the OAuth login page.</p>
+        <p><strong>Features:</strong></p>
+        <ul>
+          <li>OCR solving of image captchas</li>
+          <li>Multiple retry attempts</li>
+          <li>Automatic form submission</li>
+        </ul>
+      </div>
+      <div class="system-card">
+        <h3>Webmail Login</h3>
+        <p>Automatically logs you into the IITD Webmail system.</p>
+        <p><strong>Features:</strong></p>
+        <ul>
+          <li>Auto-fills login credentials</li>
+          <li>Automatically submits the login form</li>
+          <li>Works with RoundCube webmail interface</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Privacy Information -->
+  <div class="instructions" style="margin-top: 30px;">
+    <h3>Privacy Information</h3>
+    <p>Your credentials are stored locally on your device and are only used to log in to IITD services.</p>
+    <p>When using OAuth login, captcha images are sent to Google's Gemini API for OCR processing.</p>
+    <p>No data is stored on servers or shared with third parties.</p>
+  </div>
+  
+  <!-- Contact Section -->
+  <div class="contact-section">
+    <h3>Contact & Support</h3>
+    <p>Need help or want to suggest additional IITD services to support?</p>
+    <p>Contact: <a href="mailto:z3r0c1ph3r@pm.me" class="contact-email">z3r0c1ph3r@pm.me</a></p>
+  </div>
+  
+  <script src="options.js"></script>
+</body>
+</html>
